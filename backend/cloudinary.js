@@ -1,0 +1,21 @@
+import cloudinaryModule from "cloudinary";
+import { CloudinaryStorage } from "multer-storage-cloudinary";
+import { config } from "./config.js";
+
+const cloudinary = cloudinaryModule.v2;
+cloudinary.config({
+  cloud_name: config.cloudinary.cloud_name,
+  api_key: config.cloudinary.api_key,
+  api_secret: config.cloudinary.api_secret,
+});
+
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "sharekaro-files",
+    resource_type: "auto",
+    access_mode: "public",
+  },
+});
+
+export { cloudinary, storage };
